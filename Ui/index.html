@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="description" content="JavaScript desktop environment built with jQuery." />
+<title>jQuery Desktop</title>
+<!--[if lt IE 7]>
+<script>
+window.top.location = 'http://desktop.sonspring.com/ie.html';
+</script>
+<![endif]-->
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/desktop.css" />
+<!--[if lt IE 9]>
+<link rel="stylesheet" href="css/ie.css" />
+<![endif]-->
+<script type="text/javascript">
+var config = {
+'jspath': 'js/',
+'modules':[
+	['computer', '计算机', 'ci/admins/demo', 20, 20],	//URL为此模块的入口URL，该模块所有操作通过此URL带参数。
+	['network', '网络', 'ci/admins/demo', 20,120]
+]
+};
+</script>
+</head>
+<body>
+<div class="abs" id="wrapper">
+  <div class="abs" id="desktop"></div>
+  <div class="abs" id="bar_bottom">
+    <a class="float_left" href="#" id="show_desktop" title="Show Desktop">
+      <img src="images/misc/icon_22_desktop.png" />
+    </a>
+    <ul id="dock"></ul>
+    <a class="float_right" href="http://www.redphp.net/" title="Secure Hosting">
+      <img src="images/misc/firehost.png" />
+    </a>
+  </div>
+</div>
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery-ui.min.js" type="text/javascript"></script>
+<script src="js/jquery-mobile.detect.js" type="text/javascript"></script>
+<script src="js/jquery.desktop.js" type="text/javascript"></script>
+</body>
+</html>
