@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2014-05-29 23:28:30
+Date: 2014-05-30 23:39:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,8 +50,8 @@ CREATE TABLE `system_rbac_controllers` (
   UNIQUE KEY `controller` (`controller`) USING BTREE,
   KEY `catelog_id` (`catelog_id`),
   KEY `controller_site_id` (`site_id`),
-  CONSTRAINT `controller_site_id` FOREIGN KEY (`site_id`) REFERENCES `system_rbac_sites` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `catelog_id` FOREIGN KEY (`catelog_id`) REFERENCES `system_rbac_catelog` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  CONSTRAINT `catelog_id` FOREIGN KEY (`catelog_id`) REFERENCES `system_rbac_catelog` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `controller_site_id` FOREIGN KEY (`site_id`) REFERENCES `system_rbac_sites` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -73,8 +73,8 @@ CREATE TABLE `system_rbac_role_controller` (
   KEY `controller_id` (`controller_id`),
   KEY `user_role_id_4_controller` (`user_role_id`),
   KEY `role_controller_site_id` (`site_id`),
-  CONSTRAINT `role_controller_site_id` FOREIGN KEY (`site_id`) REFERENCES `system_rbac_sites` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `controller_id` FOREIGN KEY (`controller_id`) REFERENCES `system_rbac_controllers` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `role_controller_site_id` FOREIGN KEY (`site_id`) REFERENCES `system_rbac_sites` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `user_role_id_4_controller` FOREIGN KEY (`user_role_id`) REFERENCES `system_rbac_roles` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -107,15 +107,16 @@ INSERT INTO `system_rbac_roles` VALUES ('1', 'Admin', '0');
 DROP TABLE IF EXISTS `system_rbac_sites`;
 CREATE TABLE `system_rbac_sites` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
+  `domain` varchar(50) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  UNIQUE KEY `domain` (`domain`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of system_rbac_sites
 -- ----------------------------
-INSERT INTO `system_rbac_sites` VALUES ('1', 'Admin');
+INSERT INTO `system_rbac_sites` VALUES ('1', '', 'Admin');
 
 -- ----------------------------
 -- Table structure for `system_rbac_users`
