@@ -9,4 +9,4 @@ class CBase:
         pass
     
     def auth(self):
-        return 1;
+        return 'dddddddddd';
