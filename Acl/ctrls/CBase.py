@@ -2,7 +2,7 @@
 # coding: utf-8
 import web
 
-class CBase:
+class CBase(object):
     "a base controller class"
      
     def __init__(self):
