@@ -4,7 +4,7 @@
 import web
 
 db = web.database(dbn='mysql', db='pythonacl', user='root', pw='admin888')
+render = web.template.render('../views/', cache=False)
 
+#web.template.Template.globals['render'] = render
 web.config.debug = True
-render = web.template.render('templates/', cache=False)
-web.template.Template.globals['render'] = render

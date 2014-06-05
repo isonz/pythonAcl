@@ -1,10 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
-import web
+
+import sys
+import os
+root = os.path.abspath('..')
+sys.path.append(root)
+#print os.getcwd() 
+
+from config import settings
 
 class CBase(object):
-    "a base controller class"
-     
+    render =  settings.render
+    db = settings.db
     def __init__(self):
         pass
     
