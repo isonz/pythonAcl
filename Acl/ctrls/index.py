@@ -2,6 +2,8 @@
 # coding: utf-8
 
 from CBase import CBase
+import web
+import json
 
 class Index(CBase):
     parent = None
@@ -15,10 +17,12 @@ class Index(CBase):
 #
 #       todos1 = db.select(tb, order='finished asc, id asc')
 #       todos2 = db.select(tb, order='finished asc, id asc')
-
-        todos1 = '111'
-        todos2 = '222'
-        return self.parent.render.index(todos1, todos2)
+        
+        li = [[1,2,3],123,123.123,'abc',{'key1':(1,2,3),'key2':(4,5,6)}]
+        enjson = json.dumps(li)
+        web.header('Content-Type', 'application/json')
+        return enjson;
+        #return self.parent.render.index('11', '222')
 
 if __name__ == "__main__":
     print Index().GET()

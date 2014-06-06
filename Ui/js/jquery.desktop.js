@@ -367,7 +367,6 @@ var JQD = (function($, window, document, undefined) {
 
 jQuery(document).ready(function() {
   JQD.go();
-  init(config);
 });
 
 function init(config){
