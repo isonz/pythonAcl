@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	auth();
-	init(config);
 });
 var config = {
 'jspath': 'js/',
@@ -10,7 +9,15 @@ var config = {
 ]
 };
 function auth(){
-	$.getJSON('http://127.0.0.1:8080?callback=?', function(json){
-		console.log(json);
+	$.getJSON('http://127.0.0.1:8080?callback=?', function(data){
+		if('nologin' != data){
+			$('#desktop').append(winBoxSimple('login', '登入', 'http://127.0.0.1:8080', 'login', 500, 300, 0));
+			$('#desktop').css('bottom',0);
+			$('#window_login .float_right').hide();
+			$('#window_login .window_content').html(data);
+			//$('#desktop').append(msgWinBox('msg1', '消息', 400, 200));
+		}else{
+			init(config);
+		}
 	});
 }

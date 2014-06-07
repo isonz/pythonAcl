@@ -389,7 +389,7 @@ function initWinIcon(name, title, x, y){
 	return win;
 }
 function initWinBox(name, title, dataurl, icon){
-	win = '<div id="window_'+name+'" class="abs window" data="'+dataurl+'"><div class="abs window_inner"><div class="window_top">';
+	var win = '<div id="window_'+name+'" class="abs window" data="'+dataurl+'"><div class="abs window_inner"><div class="window_top">';
 	win += '<span class="float_left"><img src="images/icons/'+icon+'.png" width="16" />'+title+'</span>';
 	win += '<span class="float_right"><a href="#" class="window_min"></a><a href="#" class="window_resize"></a>';
 	win += '<a href="#icon_dock_'+name+'" class="window_close"></a></span></div>';
@@ -399,6 +399,28 @@ function initWinBox(name, title, dataurl, icon){
 	win += '<div class="abs window_bottom"><!-- bottom data --></div></div>';
 	win += '<span class="abs ui-resizable-handle ui-resizable-se"></span></div>';
 	$('#dock').append('<li id="icon_dock_'+name+'"><a href="#window_'+name+'"><img src="images/icons/'+icon+'.png" width="22" />'+title+'</a></li>');
+	return win;
+}
+
+function winBoxSimple(name, title, dataurl, icon, width, height, taskbar){
+	var win = '<div id="window_'+name+'" class="abs window" data="'+dataurl+'" style="display:block; width:'+width+'px; height:'+height+'px; top:100px; left:'+(($(document.body).width()/2)-(width/2))+'px"><div class="abs window_inner"><div class="window_top">';
+	win += '<span class="float_left"><img src="images/icons/'+icon+'.png" width="16" />'+title+'</span>';
+	win += '<span class="float_right"><a href="#" class="window_min"></a><a href="#" class="window_resize"></a>';
+	win += '<a href="#icon_dock_'+name+'" class="window_close"></a></span></div>';
+	win += '<div class="abs window_content" style="background: transparent"></div></div>';
+	win += '<span class="abs ui-resizable-handle ui-resizable-se"></span></div>';
+	if(1==taskbar)	$('#dock').append('<li id="icon_dock_'+name+'" style="display: block"><a href="#window_'+name+'"><img src="images/icons/'+icon+'.png" width="22" />'+title+'</a></li>');
+	return win;
+}
+
+function msgWinBox(name, title, width, height){
+	var win = '<div id="window_'+name+'" class="abs window" style="display:block; width:'+width+'px; height:'+height+'px; top:100px; left:'+(($(document.body).width()/2)-(width/2))+'px"><div class="abs window_inner"><div class="window_top">';
+	win += '<span class="float_left"><img src="images/icons/msg.png" width="16" />'+title+'</span>';
+	win += '<span class="float_right"><a href="#" class="window_min"></a><a href="#" class="window_resize"></a>';
+	win += '<a href="#icon_dock_'+name+'" class="window_close"></a></span></div>';
+	win += '<div class="abs window_content" style="background: transparent"></div></div>';
+	win += '<span class="abs ui-resizable-handle ui-resizable-se"></span></div>';
+	$('#dock').append('<li id="icon_dock_'+name+'" style="display: block"><a href="#window_'+name+'"><img src="images/icons/msg.png" width="22" />'+title+'</a></li>');
 	return win;
 }
 

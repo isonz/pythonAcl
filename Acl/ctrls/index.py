@@ -20,6 +20,8 @@ class Index(CBase):
         
         li = [[1,2,3],123,123.123,'abc',{'key1':(1,2,3),'key2':(4,5,6)}]
         enjson = json.dumps(li)
+        i = web.input()
+        enjson = i['callback']+'('+enjson+')'
         web.header('Content-Type', 'application/json')
         return enjson;
         #return self.parent.render.index('11', '222')
