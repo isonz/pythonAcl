@@ -2,20 +2,24 @@
 # coding: utf-8
 
 import web
-import sys
-import os
 import json
-root = os.path.abspath('..')
-sys.path.append(root)
-#print os.getcwd() 
 
-from config import settings
+#import os
+#import sys
+#root = os.path.abspath('..')
+#sys.path.append(root)
+#print os.getcwd() 
+# from config import settings
 
 class CBase(object):
-    render =  settings.render
+    web = web
+    json = json
+    render = web.template.render('views/', cache=False)
     db = settings.db
     def __init__(self):
-        pass
+        #self.web.template.Template.globals['render'] = self.render
+        self.web.config.debug = True
+        self.web.config.session_parameters['cookie_name'] = 'PHPSESSID'
     
     def auth(self):
-        return 'dddddddddd';
+        todos2 = self.db.select(tb, order='finished asc, id asc')
