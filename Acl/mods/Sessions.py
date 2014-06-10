@@ -3,7 +3,7 @@
 
 from MBase import MBase
 
-class Index(CBase):
+class Index(MBase):
     
     def __init__(self):
         pass

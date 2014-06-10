@@ -4,7 +4,7 @@
 import web
 
 class MBase:
-    db = web.database(dbn='mysql', db='pythonacl', user='root', pw='admin888')
+    
     
     def __init__(self):
         pass
