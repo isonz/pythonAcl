@@ -4,6 +4,7 @@
 from CBase import CBase
 
 class Index(CBase):
+    
     parent = None
     
     def __init__(self):
@@ -26,3 +27,4 @@ class Index(CBase):
 
 if __name__ == "__main__":
     print Index().GET()
+    
