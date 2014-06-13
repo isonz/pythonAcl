@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import web
 import os
 import sys
 root = os.path.abspath('..')
@@ -10,7 +9,6 @@ from libs.DB import DB
 
 class MBase(object):
     
-    web = web
     db = None
     tb_prefix = None
     
