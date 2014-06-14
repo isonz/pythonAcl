@@ -17,7 +17,8 @@ class CBase(object):
     json = json
     render = settings.render
     session = web.config.get('_session')
-
+    root = root
+    
     def __init__(self):
         self.getSession()
         pass

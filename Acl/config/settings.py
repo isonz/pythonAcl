@@ -8,7 +8,7 @@ tb_prefix = ''
 
 render = web.template.render('views/', cache=False)
 
-web.config.debug = False
+web.config.debug = True
 web.config.session_parameters['cookie_name'] = 'PHPSESSID'
 web.config.session_parameters['timeout'] = 600 
 #web.config.session_parameters['cookie_domain'] = None

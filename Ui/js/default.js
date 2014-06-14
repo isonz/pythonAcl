@@ -1,4 +1,6 @@
+var mainurl = 'http://127.0.0.1:8080';
 $(document).ready(function() {
+	$.ajaxf.install('js/Ajax.swf'); 
 	auth();
 });
 var config = {
@@ -9,13 +11,19 @@ var config = {
 ]
 };
 function auth(){
-	$.getJSON('http://127.0.0.1:8080?callback=?', function(data){
-		if('nologin' != data){
+	$.getJSON(mainurl+'?callback=?', function(data){
+		if('0'!= data.error){
 			$('#desktop').append(winBoxSimple('login', '登入', 'http://127.0.0.1:8080', 'login', 500, 300, 0));
+			//$('#desktop').append(msgWinBox('msg1', '消息', 400, 200));
 			$('#desktop').css('bottom',0);
 			$('#window_login .float_right').hide();
-			$('#window_login .window_content').html(data);
-			//$('#desktop').append(msgWinBox('msg1', '消息', 400, 200));
+			$('#window_login .window_content').html(data.html);
+			$('#loginbutton').click(function(){
+				$.ajaxf.post(mainurl+$(this).attr('data'),{'username':$('#username').val(),'password':$('#password').val()},function(rs){
+					console.log(rs);									  
+				})
+				
+			});
 		}else{
 			init(config);
 		}
