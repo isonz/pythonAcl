@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2014-05-30 23:39:37
+Date: 2014-06-13 18:19:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -100,6 +100,23 @@ CREATE TABLE `system_rbac_roles` (
 -- Records of system_rbac_roles
 -- ----------------------------
 INSERT INTO `system_rbac_roles` VALUES ('1', 'Admin', '0');
+
+-- ----------------------------
+-- Table structure for `system_rbac_sessions`
+-- ----------------------------
+DROP TABLE IF EXISTS `system_rbac_sessions`;
+CREATE TABLE `system_rbac_sessions` (
+  `session_id` char(128) NOT NULL,
+  `atime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `data` text,
+  UNIQUE KEY `session_id` (`session_id`),
+  KEY `atime` (`atime`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of system_rbac_sessions
+-- ----------------------------
+INSERT INTO `system_rbac_sessions` VALUES ('e345ba323426724476d7606fa0d4a1b0b5488eb6', '2014-06-13 18:17:16', 'KGRwMQpTJ2NvdW50JwpwMgpJMApzUydpcCcKcDMKVjEyNy4wLjAuMQpwNApzUydzZXNzaW9uX2lk\nJwpwNQpTJ2UzNDViYTMyMzQyNjcyNDQ3NmQ3NjA2ZmEwZDRhMWIwYjU0ODhlYjYnCnA2CnMu\n');
 
 -- ----------------------------
 -- Table structure for `system_rbac_sites`
