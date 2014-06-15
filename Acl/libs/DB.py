@@ -34,8 +34,9 @@ class DB(object):
     
     def getRow(self, tb, vars={}, what='*', where=None, group=None, _test=False):
         row = self.select(self.tb_prefix+tb, vars, what, where, None, group, 1, None, _test)
-        return row[0]
-    
+        if row :
+            return row[0]
+        return None
     
     
 if __name__ == "__main__":
@@ -53,10 +54,10 @@ if __name__ == "__main__":
     for row in rows:
         print row['session_id']
     ''' 
-    '''
+
     row = db.getRow('system_rbac_sessions', {'session_id':'qqqq'}, '*', 'session_id=$session_id')
     print row['data']
-    '''
+
     
         
     

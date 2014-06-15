@@ -28,8 +28,17 @@ class Index(CBase):
             return out
 
     def POST(self):
-        return 'login'
+        input = self.parent.web.input()
+        login = None
+        passwd = None
+        if 'username' in input:  login = input['username']
+        if 'password' in input:  passwd = input['password']
 
+        if login is None or passwd is None: 
+            out = {'error':'1', 'msg':'请填入用户名和密码'}
+            return self.parent.json.dumps(out)
+        login_status = self.parent.Users.login(login, passwd)
+        print login_status
 
 
 class Crossdomain(CBase):
@@ -42,6 +51,7 @@ class Crossdomain(CBase):
         f = open(self.parent.root+'/Acl/crossdomain.xml','r')
         xml = f.read()
         f.close()
+        self.parent.web.header('Content-Type', 'application/xml')
         return xml
     
     

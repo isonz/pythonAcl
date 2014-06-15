@@ -19,10 +19,9 @@ function auth(){
 			$('#window_login .float_right').hide();
 			$('#window_login .window_content').html(data.html);
 			$('#loginbutton').click(function(){
-				$.ajaxf.post(mainurl+$(this).attr('data'),{'username':$('#username').val(),'password':$('#password').val()},function(rs){
+				$.ajaxf.post(mainurl+$(this).attr('data'), 'username='+$('#username').val()+'&password='+$('#password').val(), function(rs){
 					console.log(rs);									  
-				})
-				
+				},'json');
 			});
 		}else{
 			init(config);

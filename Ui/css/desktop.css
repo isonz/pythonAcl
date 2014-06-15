@@ -2,7 +2,7 @@
 ----------------------------------------------------------------------------------------------------*/
 
 * {
-  cursor: default;
+  /* cursor: default; */
 }
 
 html,
@@ -58,6 +58,7 @@ li {
   height: 15px;
   right: 0;
   bottom: 0;
+  cursor: se-resize;
 }
 
 div.ui-resizable-handle {

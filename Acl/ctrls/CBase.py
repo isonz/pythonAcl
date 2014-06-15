@@ -11,6 +11,7 @@ sys.path.append(root)
 #print os.getcwd() 
 from config import settings
 from mods.Sessions import Sessions
+from mods.Users import Users
 
 class CBase(object):
     web = web
@@ -18,6 +19,8 @@ class CBase(object):
     render = settings.render
     session = web.config.get('_session')
     root = root
+    
+    Users = Users()
     
     def __init__(self):
         self.getSession()
