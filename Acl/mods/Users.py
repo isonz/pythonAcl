@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import web
 import hashlib
 from MBase import MBase
 
@@ -15,10 +14,6 @@ class Users(MBase):
         self._parent = super(Users, self)
         return self._parent.__init__()
     
-    def db(self):
-        self._db = self._parent.getDb()
-        return self._db
-    
     def login(self, login, pwd):
         row = self.db().getRow(self.table(), {'login':login, 'status':'1'}, '*', 'login=$login AND status=$status')
         try:
@@ -26,19 +21,24 @@ class Users(MBase):
             salt = row['salt']
             pwd = hashlib.md5(hashlib.md5(pwd).hexdigest()+salt).hexdigest()
             if passwd==pwd:
-                session = web.config._session
-                session.user = {'login':login, 'site_id':row['site_id'], 'user_role_id':row['user_role_id'], 'last_login':row['last_login'], 'last_login_ip':row['last_login_ip']}
-                return True
+                return row
             else:
                 return False
         except:
-            return False
+            return None
         
         
+    def db(self):
+        self._db = self._parent.db
+        return self._db
     
     def table(self):
-        return self._parent.getTbPrefix()+self._table
+        return self._parent.tb_prefix+self._table
 
 if __name__ == "__main__":
-    pass
-    #MBase.login('ison','zhang')
+    user = Users()
+    print user.login('ison','zhang')
+
+
+
+

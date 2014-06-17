@@ -7,7 +7,7 @@ root = os.path.abspath('..')
 sys.path.append(root)
 from config import settings
 
-class DB(object):
+class DBS(object):
     _db = settings.db
     tb_prefix = settings.tb_prefix
 
@@ -54,10 +54,12 @@ if __name__ == "__main__":
     for row in rows:
         print row['session_id']
     ''' 
-
+    '''
     row = db.getRow('system_rbac_sessions', {'session_id':'qqqq'}, '*', 'session_id=$session_id')
     print row['data']
-
-    
-        
+    '''
+    '''
+    row = db.getRow('system_rbac_users', {'login':'ison', 'status':'1'}, '*', 'login=$login AND status=$status')
+    print row['passwd']
+    ''' 
     

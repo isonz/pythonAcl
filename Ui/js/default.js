@@ -1,8 +1,10 @@
-var mainurl = 'http://127.0.0.1:8080';
+var mainurl = 'http://py.ison.com';
 $(document).ready(function() {
 	$.ajaxf.install('js/Ajax.swf'); 
 	auth();
 });
+
+//此设置可以从外部应用中读取
 var config = {
 'jspath': 'js/',
 'modules':[
@@ -10,10 +12,11 @@ var config = {
 	['network', '网络', 'ci/admins/demo', 20,120]
 ]
 };
+
 function auth(){
-	$.getJSON(mainurl+'?callback=?', function(data){
+	$.getJSON(mainurl+'/?callback=?', function(data){
 		if('0'!= data.error){
-			$('#desktop').append(winBoxSimple('login', '登入', 'http://127.0.0.1:8080', 'login', 500, 300, 0));
+			$('#desktop').append(winBoxSimple('login', '登入', 'mainurl', 'login', 500, 300, 0));
 			//$('#desktop').append(msgWinBox('msg1', '消息', 400, 200));
 			$('#desktop').css('bottom',0);
 			$('#window_login .float_right').hide();

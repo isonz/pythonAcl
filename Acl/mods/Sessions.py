@@ -15,8 +15,8 @@ class Sessions(MBase):
 
     def init(self, app):        
         if web.config.get('_session') is None:
-            store = web.session.DBStore(self._parent.getDb(), self._parent.getTbPrefix()+self._table)
-            session = web.session.Session(app, store, initializer={'count': 0})
+            store = web.session.DBStore(self._parent._db, self._parent.tb_prefix+self._table)
+            session = web.session.Session(app, store)
             web.config._session = session
         else:
             session = web.config._session
