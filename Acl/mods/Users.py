@@ -14,13 +14,15 @@ class Users(MBase):
         self._parent = super(Users, self)
         return self._parent.__init__()
     
-    def login(self, login, pwd):
+    def login(self, login, pwd, ip):
         row = self.db().getRow(self.table(), {'login':login, 'status':'1'}, '*', 'login=$login AND status=$status')
         try:
             passwd = row['passwd']
             salt = row['salt']
             pwd = hashlib.md5(hashlib.md5(pwd).hexdigest()+salt).hexdigest()
             if passwd==pwd:
+                last_login = self._parent.func.getNow()
+                self.db().update(self.table(), {"last_login":last_login, "last_login_ip":ip}, 'login="'+login+'"')
                 return row
             else:
                 return False
@@ -29,7 +31,8 @@ class Users(MBase):
         
         
     def db(self):
-        self._db = self._parent.db
+        if self._db is None:
+            self._db = self._parent.db
         return self._db
     
     def table(self):

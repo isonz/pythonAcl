@@ -7,7 +7,7 @@ root = os.path.abspath('..')
 sys.path.append(root)
 from config import settings
 
-class DBS(object):
+class DBS():
     _db = settings.db
     tb_prefix = settings.tb_prefix
 

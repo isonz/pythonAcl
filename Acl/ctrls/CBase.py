@@ -36,9 +36,12 @@ class CBase(object):
         if self.session.get('user') is None:
             return False
         else:
-            return True
+            return self.session.get('user')
     
     def logout(self):
         return Sessions().kill()
+    
+    def getIp(self):
+        return web.ctx['ip']
         
         

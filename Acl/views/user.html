@@ -1,0 +1,15 @@
+$def with (user)
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="50%">欢迎您：$user['login']</td>
+    <td width="50%" align="right"><a href="javascript:logout()">退出</a></td>
+  </tr>
+  <tr>
+    <td>站点: $user['site_id']</td>
+    <td>角色: $user['user_role_id']</td>
+  </tr>
+  <tr>
+    <td>最近登入时间: $user['last_login']</td>
+    <td>最近登入IP: $user['last_login_ip']</td>
+  </tr>
+</table>

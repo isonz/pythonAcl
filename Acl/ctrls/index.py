@@ -14,10 +14,10 @@ class Index(CBase):
     def GET(self):
         self.parent.web.header('Content-Type', 'application/json')
         input = self.parent.web.input()
-        if self.parent.auth():
-            li = [[1,2,3],123,123.123,'abc',{'key1':(1,2,3),'key2':(4,5,6)}]
-            li = {'error':'0','html':li}
-            out = self.parent.json.dumps(li)
+        user = self.parent.auth()
+        if user:
+            data = {'error':'0','html':{"username":user['login']}}
+            out = self.parent.json.dumps(data)
             if 'callback' in input:  out = input['callback']+'('+out+')'
             return out;
         else:
@@ -39,16 +39,12 @@ class Index(CBase):
             out = {'error':'1', 'msg':'请填入用户名和密码'}
             return self.parent.json.dumps(out)
         
-        row = self.parent.Users.login(login, passwd)
+        ip = self.parent.getIp()
+        row = self.parent.Users.login(login, passwd, ip)
         
         if row: 
             session = self.parent.web.config._session
-            session.user = {
-                            'login':login, 'site_id':row['site_id'], 
-                            'user_role_id':row['user_role_id'], 
-                            'last_login':row['last_login'], 
-                            'last_login_ip':row['last_login_ip']
-                            }
+            session.user = {'login':login, 'site_id':row['site_id'], 'user_role_id':row['user_role_id'], 'last_login':row['last_login'], 'last_login_ip':row['last_login_ip']}
             out = {'error':'0', 'msg':'登入成功'}
             return self.parent.json.dumps(out)
         else:

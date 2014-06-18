@@ -187,7 +187,7 @@ var JQD = (function($, window, document, undefined) {
         		$(y+" .window_main").html(data.main);
         		$(y+" .window_aside").html(data.aside);
         		$(y+" .window_bottom").html(data.bottom);
-        		loadScriptFile(config.jspath, y.replace('#window_',''), id);
+        		loadScriptFile(jsmodule, y.replace('#window_',''), id);
           	});
 		  }
         });
@@ -366,7 +366,7 @@ var JQD = (function($, window, document, undefined) {
 })(jQuery, this, this.document);
 
 jQuery(document).ready(function() {
-  JQD.go();
+  JQD.go();  
 });
 
 function init(config){
@@ -426,7 +426,7 @@ function msgWinBox(name, title, width, height){
 
 function loadScriptFile(path, module,id){
     var s = document.createElement("script");
-    s.src = path+'module/'+module+'.js';
+    s.src = path+module+'.js';
     s.type = "text/javascript";
     s.id = id;
     document.body.appendChild(s);

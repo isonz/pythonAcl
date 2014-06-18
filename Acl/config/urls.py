@@ -6,5 +6,5 @@ ctrls = 'ctrls.'
 urls = (
     '/',  ctrls+'index.Index',
     '/crossdomain.xml', ctrls+'index.Crossdomain',
-    
+    '/user',  ctrls+'user.Index',
 )
