@@ -12,6 +12,12 @@
     <td><input type="password" name="password" id="password"></td>
   </tr>
   <tr height="50" style="line-height:50px">
+    <td style="text-align:right">验证码：</td>
+    <td>
+    	<a href="javascript:changeCaptcha()"><img src="/captcha.gif" border="0" id="captcha_gif" /></a>
+    	<input type="text"  maxlength="6" name="captcha" id="captcha" style="width:70px"></td>
+  </tr>
+  <tr height="50" style="line-height:50px">
     <td colspan="2" style="text-align:center;">
     <input type="submit" name="button" value="提 交" style="width:50px; height:30px">
     </td>

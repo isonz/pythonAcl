@@ -12,6 +12,7 @@ sys.path.append(root)
 from config import settings
 from mods.Sessions import Sessions
 from mods.Users import Users
+from libs.Captcha import Captcha
 
 class CBase(object):
     web = web
@@ -21,6 +22,7 @@ class CBase(object):
     root = root
     
     Users = Users()
+    Captcha = Captcha()
     
     def __init__(self):
         self.getSession()

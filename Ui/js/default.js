@@ -34,13 +34,29 @@ function auth(){
 			$('#desktop').css('bottom',0);
 			$('#window_login .float_right').hide();
 			$('#window_login .window_content').html(data.html);
+			var captcha = $('#captcha_gif').attr('src');
+			$('#captcha_gif').attr('src', mainurl+captcha);
 			$('#loginform').submit(function(){
-				$.ajaxf.post(mainurl+$(this).attr('action'), 'username='+$('#username').val()+'&password='+$('#password').val(), function(rs){
+				var username = $('#username').val();
+				var password = $('#password').val();
+				var captcha = $('#captcha').val();
+				if(''==username || ''==password || ''==captcha) {
+					$("#login_error_msg").html('<img src="images/icons/sys/error.png" />&nbsp;&nbsp;请填完整信息');
+					return false;
+				}
+				$.ajaxf.post(mainurl+$(this).attr('action'), 'username='+username+'&password='+password+'&captcha='+captcha, function(rs){
 					console.log(rs);
 					if('0'==rs.error){
 						init(config);
 						$("#window_login").hide();
 					}else{
+						if('2'==rs.error){
+							$('#captcha').val('');
+							$('#captcha').focus();
+						}else{
+							$('#password').val('');
+							$('#password').focus();
+						}
 						$("#login_error_msg").html('<img src="images/icons/sys/error.png" />&nbsp;&nbsp;'+rs.msg);
 					}
 				},'json');
@@ -57,4 +73,10 @@ function logout(){
 		if('0'==data.error) location.reload();
 	});
 }
+function changeCaptcha(obj){
+	var captcha = $('#captcha_gif').attr('src');
+	$('#captcha_gif').attr('src', captcha);
+}
+
+
 

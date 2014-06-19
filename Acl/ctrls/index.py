@@ -32,18 +32,24 @@ class Index(CBase):
         input = self.parent.web.input()
         login = None
         passwd = None
+        captcha = None
         if 'username' in input:  login = input['username']
         if 'password' in input:  passwd = input['password']
+        if 'captcha' in input:  captcha = input['captcha']
+        session = self.parent.web.config._session
 
-        if login is None or passwd is None: 
+        if login is None or passwd is None or captcha is None: 
             out = {'error':'1', 'msg':'请填入用户名和密码'}
+            return self.parent.json.dumps(out)
+        
+        if captcha.lower() != session.captcha.lower():
+            out = {'error':'2', 'msg':'验证码不正确'}
             return self.parent.json.dumps(out)
         
         ip = self.parent.getIp()
         row = self.parent.Users.login(login, passwd, ip)
         
         if row: 
-            session = self.parent.web.config._session
             session.user = {'login':login, 'site_id':row['site_id'], 'user_role_id':row['user_role_id'], 'last_login':row['last_login'], 'last_login_ip':row['last_login_ip']}
             out = {'error':'0', 'msg':'登入成功'}
             return self.parent.json.dumps(out)
@@ -66,8 +72,21 @@ class Crossdomain(CBase):
         return xml
     
     
+class Captcha(CBase):
+    parent = None
+    def __init__(self):
+        self.parent = super(Captcha, self)
+        return self.parent.__init__()
+    
+    def GET(self):
+        session = self.parent.web.config._session
+        self.parent.web.header('Content-Type', 'image/gif')
+        captcha = self.parent.Captcha.set(70, 22, 16, 5, (255,0,0), (222,222,222), 'gif',(200,'#ffffff'))
+        session.captcha = captcha[0]
+        #print session.captcha
+        return captcha[1].read()
     
 
 if __name__ == "__main__":
-    print Index().GET()
+    print Captcha().GET()
     
