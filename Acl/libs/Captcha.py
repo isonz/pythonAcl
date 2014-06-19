@@ -13,7 +13,7 @@ class Captcha:
             for y in range(0, height):
                 draw.point((x, y), bgcolor)
     
-        font = PIL.ImageFont.truetype(filename='D:/Fonts/3.ttf', size=fontsize)
+        font = PIL.ImageFont.truetype(filename='/tmp/fonts/3.ttf', size=fontsize)
         alphabet = '0123456789abcdefghijkmnpqrstuvwxyABCDEFGHJKMNPQRSTUVWXY'
         word = ''
         for i in range(num):

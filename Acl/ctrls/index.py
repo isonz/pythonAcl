@@ -81,7 +81,7 @@ class Captcha(CBase):
     def GET(self):
         session = self.parent.web.config._session
         self.parent.web.header('Content-Type', 'image/gif')
-        captcha = self.parent.Captcha.set(70, 22, 16, 5, (255,0,0), (222,222,222), 'gif',(200,'#ffffff'))
+        captcha = self.parent.Captcha.set(70, 22, 16, 5, (102,102,102), (255,255,255), 'gif',(300,'#666666'))
         session.captcha = captcha[0]
         #print session.captcha
         return captcha[1].read()

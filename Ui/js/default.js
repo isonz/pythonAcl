@@ -1,4 +1,4 @@
-var mainurl = 'http://py.ison.com';
+var mainurl = 'http://py.ison.redphp.net:8000';
 var jsmodule =  'js/module/';
 $(document).ready(function() {
 	$.ajaxf.install('js/Ajax.swf'); 
